@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Divisibility</title>
+</head>
+<body>
+    <h1>Check Divisibility by 2024</h1>
+    <input type="number" id="number" placeholder="Enter an integer">
+    <button onclick="checkDivisibility()">Check</button>
+    <p id="result"></p>
+
+    <script>
+        function checkDivisibility() {
+            const number = document.getElementById('number').value;
+
+            fetch(`http://localhost:5229/api/Divisible/${number}`)
+                .then(response => response.json())
+                .then(data => {
+                    const resultElement = document.getElementById('result');
+                    if (data.divisibleBy2024) {
+                        resultElement.textContent = `${number} is divisible by 2024.`;
+                        window.location.href = `http://127.0.0.1:5500/xacnhan.html?result=${number} is divisible by 2024.`;
+                    } else {
+                        resultElement.textContent = `${number} is not divisible by 2024.`;
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
